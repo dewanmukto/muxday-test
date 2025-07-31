@@ -1,0 +1,45 @@
+<header class="site-header" role="banner">
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+        <div class="container">
+            <div class="navbar-brand">
+                <a href="{{ '/' | relative_url }}" class="brand-link">
+                    <span class="brand-text">MuxDay</span>
+                    <span class="brand-tagline">Ideas Worth Sharing</span>
+                </a>
+            </div>
+            
+            <div class="navbar-menu">
+                <div class="navbar-nav">
+                    <a href="{{ '/' | relative_url }}" class="nav-link">Home</a>
+                    <a href="{{ '/technology' | relative_url }}" class="nav-link">Technology</a>
+                    <a href="{{ '/trends' | relative_url }}" class="nav-link">Global Trends</a>
+                    <a href="{{ '/music' | relative_url }}" class="nav-link">Music</a>
+                    <a href="{{ '/ideas' | relative_url }}" class="nav-link">Big Ideas</a>
+                    <a href="{{ '/about' | relative_url }}" class="nav-link">About</a>
+                </div>
+                
+                <div class="navbar-actions">
+                    <button class="search-toggle" aria-label="Toggle search">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.35-4.35"></path>
+                        </svg>
+                    </button>
+                    <button class="mobile-menu-toggle" aria-label="Toggle mobile menu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Search Overlay -->
+    <div class="search-overlay" id="search-overlay">
+        <div class="search-container">
+            <input type="search" placeholder="Search MuxDay..." class="search-input" id="search-input">
+            <div class="search-results" id="search-results"></div>
+        </div>
+    </div>
+</header>

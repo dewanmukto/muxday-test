@@ -1,0 +1,110 @@
+---
+layout: default
+---
+
+<article class="post-article" itemscope itemtype="http://schema.org/Article">
+    <!-- Hero Section -->
+    <header class="post-header">
+        <div class="container">
+            <div class="post-meta">
+                <span class="post-category">{{ page.category | capitalize }}</span>
+                <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
+                    {{ page.date | date: "%B %d, %Y" }}
+                </time>
+                <span class="reading-time">{{ content | reading_time }} min read</span>
+            </div>
+            
+            <h1 class="post-title" itemprop="headline">{{ page.title }}</h1>
+            
+            {% if page.excerpt %}
+            <p class="post-excerpt" itemprop="description">{{ page.excerpt }}</p>
+            {% endif %}
+            
+            <div class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <img src="{{ page.author_image | default: '/assets/images/default-author.jpg' }}" alt="{{ page.author | default: site.author }}" class="author-avatar">
+                <div class="author-info">
+                    <span class="author-name" itemprop="name">{{ page.author | default: site.author }}</span>
+                    <span class="author-title">{{ page.author_title | default: "Content Creator" }}</span>
+                </div>
+            </div>
+            
+            <!-- Immediate Share Buttons -->
+            {% include post-share-buttons.html %}
+        </div>
+        
+        {% if page.image %}
+        <div class="post-image">
+            <img src="{{ page.image }}" alt="{{ page.title }}" itemprop="image">
+        </div>
+        {% endif %}
+    </header>
+    
+    <!-- Sticky Share Sidebar -->
+    {% include sticky-share-sidebar.html %}
+    
+    <!-- Post Content -->
+    <div class="post-content">
+        <div class="container">
+            <div class="content-wrapper">
+                <div class="post-body" itemprop="articleBody">
+                    {{ content }}
+                </div>
+                
+                <!-- Tags -->
+                {% if page.tags %}
+                <div class="post-tags">
+                    <span class="tags-label">Tags:</span>
+                    {% for tag in page.tags %}
+                    <a href="{{ '/tags/' | append: tag | relative_url }}" class="tag-link">#{{ tag }}</a>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                
+                <!-- Call-to-Action Share Section -->
+                {% include cta-share-section.html %}
+                
+                <!-- Author Bio -->
+                {% include author-bio.html %}
+            </div>
+        </div>
+    </div>
+    
+    <!-- Related Posts -->
+    {% include related-posts.html %}
+    
+    <!-- Newsletter Signup -->
+    {% include newsletter-cta.html %}
+</article>
+
+<!-- Schema.org JSON-LD for Article -->
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "{{ page.title }}",
+    "description": "{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}",
+    "image": "{% if page.image %}{{ page.image | absolute_url }}{% else %}{{ site.default_image | absolute_url }}{% endif %}",
+    "author": {
+        "@type": "Person",
+        "name": "{{ page.author | default: site.author }}",
+        "url": "{{ site.url }}/about"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "{{ site.title }}",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "{{ site.logo | absolute_url }}"
+        }
+    },
+    "datePublished": "{{ page.date | date_to_xmlschema }}",
+    "dateModified": "{{ page.last_modified_at | default: page.date | date_to_xmlschema }}",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "{{ page.url | absolute_url }}"
+    },
+    "keywords": "{{ page.tags | join: ', ' }}",
+    "articleSection": "{{ page.category | capitalize }}",
+    "wordCount": "{{ content | number_of_words }}"
+}
+</script>

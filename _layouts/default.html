@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- Primary Meta Tags -->
+    <title>{% if page.title %}{{ page.title }} | {{ site.title }}{% else %}{{ site.title }} - {{ site.description }}{% endif %}</title>
+    <meta name="title" content="{% if page.title %}{{ page.title }} | {{ site.title }}{% else %}{{ site.title }} - {{ site.description }}{% endif %}">
+    <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
+    <meta name="keywords" content="{% if page.tags %}{{ page.tags | join: ', ' }}{% endif %}{{ site.keywords }}">
+    <meta name="author" content="{{ site.author }}">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}">
+    <meta property="og:url" content="{{ page.url | absolute_url }}">
+    <meta property="og:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}">
+    <meta property="og:description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
+    <meta property="og:image" content="{% if page.image %}{{ page.image | absolute_url }}{% else %}{{ site.default_image | absolute_url }}{% endif %}">
+    <meta property="og:site_name" content="{{ site.title }}">
+    <meta property="article:publisher" content="{{ site.facebook_url }}">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="{{ page.url | absolute_url }}">
+    <meta property="twitter:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}">
+    <meta property="twitter:description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
+    <meta property="twitter:image" content="{% if page.image %}{{ page.image | absolute_url }}{% else %}{{ site.default_image | absolute_url }}{% endif %}">
+    <meta name="twitter:creator" content="{{ site.twitter_username }}">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="{{ page.url | absolute_url }}">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+    
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "{% if page.layout == 'post' %}Article{% else %}WebSite{% endif %}",
+        {% if page.layout == 'post' %}
+        "headline": "{{ page.title }}",
+        "description": "{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}",
+        "image": "{% if page.image %}{{ page.image | absolute_url }}{% else %}{{ site.default_image | absolute_url }}{% endif %}",
+        "author": {
+            "@type": "Person",
+            "name": "{{ page.author | default: site.author }}"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "{{ site.title }}",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "{{ site.logo | absolute_url }}"
+            }
+        },
+        "datePublished": "{{ page.date | date_to_xmlschema }}",
+        "dateModified": "{{ page.last_modified_at | default: page.date | date_to_xmlschema }}",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "{{ page.url | absolute_url }}"
+        },
+        {% endif %}
+        "url": "{{ page.url | absolute_url }}",
+        "name": "{{ site.title }}",
+        "description": "{{ site.description }}"
+    }
+    </script>
+    
+    <!-- Google Analytics -->
+    {% if site.google_analytics %}
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics }}"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '{{ site.google_analytics }}');
+    </script>
+    {% endif %}
+</head>
+<body>
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <!-- Header -->
+    {% include header.html %}
+    
+    <!-- Breadcrumbs -->
+    {% if page.layout == 'post' or page.layout == 'page' %}
+    {% include breadcrumbs.html %}
+    {% endif %}
+    
+    <!-- Main Content -->
+    <main id="main-content" class="main-content" role="main">
+        {{ content }}
+    </main>
+    
+    <!-- Footer -->
+    {% include footer.html %}
+    
+    <!-- Floating Share Button -->
+    {% include floating-share.html %}
+    
+    <!-- Reading Progress Bar -->
+    <div class="reading-progress" id="reading-progress"></div>
+    
+    <!-- JavaScript -->
+    <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
+</body>
+</html>

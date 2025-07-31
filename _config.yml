@@ -1,0 +1,102 @@
+# Site settings
+title: "MuxDay"
+description: "Curating the world's most powerful ideas, trends, and insights worth sharing. From cutting-edge technology to global trends, music discoveries to transformative thoughts."
+url: "https://muxday.com"
+baseurl: ""
+author: "MuxDay Team"
+author_bio: "A collective of writers, thinkers, and creators passionate about sharing ideas that matter."
+keywords: "technology, global trends, music, ideas, innovation, insights, culture, future"
+
+# SEO and Social
+default_image: "/assets/images/muxday-og-image.jpg"
+logo: "/assets/images/muxday-logo.png"
+twitter_username: "muxday"
+facebook_url: "https://facebook.com/muxday"
+twitter_url: "https://twitter.com/muxday"
+linkedin_url: "https://linkedin.com/company/muxday"
+
+# Analytics
+google_analytics: "G-XXXXXXXXXX"
+
+# Newsletter
+newsletter_action: "https://your-newsletter-service.com/subscribe"
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+permalink: /:categories/:title/
+paginate: 12
+paginate_path: "/page:num/"
+
+# Collections
+collections:
+  posts:
+    output: true
+    permalink: /:categories/:title/
+
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+  - jekyll-paginate
+  - jekyll-redirect-from
+
+# Compression
+compress_html:
+  clippings: all
+  comments: all
+  endings: all
+  startings: [html, head, body]
+  blanklines: false
+  profile: false
+
+# Exclude from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+  - README.md
+  - LICENSE
+  - package.json
+  - package-lock.json
+
+# Include
+include:
+  - _pages
+
+# Default front matter
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      author: "MuxDay Team"
+      image: "/assets/images/default-post.jpg"
+  - scope:
+      path: "_pages"
+      type: "pages"
+    values:
+      layout: "page"
+
+# Reading time calculation
+reading_time:
+  words_per_minute: 200
+
+# Related posts
+related_posts_limit: 3
+
+# Social sharing
+social_sharing:
+  twitter: true
+  facebook: true
+  linkedin: true
+
+# Search
+search: true
+search_full_content: true

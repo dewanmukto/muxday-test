@@ -1,0 +1,228 @@
+---
+layout: default
+title: "MuxDay - Ideas Worth Sharing"
+description: "Discover powerful ideas, cutting-edge technology insights, global trends, music recommendations, and transformative thoughts that shape our world."
+---
+
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="container">
+        <div class="hero-content">
+            <h1 class="hero-title">Ideas Worth Sharing</h1>
+            <p class="hero-subtitle">Discover powerful insights on technology, global trends, music, and transformative ideas that shape our world.</p>
+            <div class="hero-cta">
+                <a href="#featured-posts" class="cta-button primary">Explore Ideas</a>
+                <a href="#newsletter" class="cta-button secondary">Get Weekly Insights</a>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="floating-cards">
+                <div class="card tech">Tech</div>
+                <div class="card trends">Trends</div>
+                <div class="card music">Music</div>
+                <div class="card ideas">Ideas</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Posts -->
+<section id="featured-posts" class="featured-posts">
+    <div class="container">
+        <h2 class="section-title">Latest Insights</h2>
+        <div class="posts-grid">
+            {% for post in site.posts limit:6 %}
+            <article class="post-card featured" itemscope itemtype="http://schema.org/Article">
+                {% if post.image %}
+                <div class="post-card-image">
+                    <img src="{{ post.image }}" alt="{{ post.title }}" itemprop="image">
+                    <div class="post-card-overlay">
+                        <span class="post-category">{{ post.category | capitalize }}</span>
+                    </div>
+                </div>
+                {% endif %}
+                
+                <div class="post-card-content">
+                    <div class="post-card-meta">
+                        <time datetime="{{ post.date | date_to_xmlschema }}" itemprop="datePublished">
+                            {{ post.date | date: "%B %d, %Y" }}
+                        </time>
+                        <span class="reading-time">{{ post.content | reading_time }} min read</span>
+                    </div>
+                    
+                    <h3 class="post-card-title" itemprop="headline">
+                        <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+                    </h3>
+                    
+                    <p class="post-card-excerpt" itemprop="description">
+                        {{ post.excerpt | strip_html | truncate: 120 }}
+                    </p>
+                    
+                    <div class="post-card-footer">
+                        <div class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+                            <img src="{{ post.author_image | default: '/assets/images/default-author.jpg' }}" alt="{{ post.author | default: site.author }}" class="author-avatar-small">
+                            <span itemprop="name">{{ post.author | default: site.author }}</span>
+                        </div>
+                        
+                        <div class="post-share-preview">
+                            <button class="share-btn-small twitter" data-share="twitter" data-url="{{ post.url | absolute_url }}" data-title="{{ post.title }}" aria-label="Share on Twitter">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/>
+                                </svg>
+                            </button>
+                            <button class="share-btn-small facebook" data-share="facebook" data-url="{{ post.url | absolute_url }}" data-title="{{ post.title }}" aria-label="Share on Facebook">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+        
+        <div class="section-cta">
+            <a href="/all-posts" class="cta-button outline">View All Posts</a>
+        </div>
+    </div>
+</section>
+
+<!-- Categories Section -->
+<section class="categories-section">
+    <div class="container">
+        <h2 class="section-title">Explore by Category</h2>
+        <div class="categories-grid">
+            <div class="category-card technology">
+                <div class="category-icon">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                        <line x1="8" y1="21" x2="16" y2="21"/>
+                        <line x1="12" y1="17" x2="12" y2="21"/>
+                    </svg>
+                </div>
+                <h3>Technology</h3>
+                <p>Cutting-edge tech insights, AI developments, and digital transformation trends.</p>
+                <a href="/technology" class="category-link">Explore Tech →</a>
+            </div>
+            
+            <div class="category-card trends">
+                <div class="category-icon">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z"/>
+                        <path d="M9 12l2 2 4-4"/>
+                    </svg>
+                </div>
+                <h3>Global Trends</h3>
+                <p>Emerging patterns shaping society, culture, and the future of humanity.</p>
+                <a href="/trends" class="category-link">Discover Trends →</a>
+            </div>
+            
+            <div class="category-card music">
+                <div class="category-icon">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 18V5l12-2v13"/>
+                        <circle cx="6" cy="18" r="3"/>
+                        <circle cx="18" cy="16" r="3"/>
+                    </svg>
+                </div>
+                <h3>Music</h3>
+                <p>Curated recommendations, artist spotlights, and the cultural impact of sound.</p>
+                <a href="/music" class="category-link">Listen & Learn →</a>
+            </div>
+            
+            <div class="category-card ideas">
+                <div class="category-icon">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 12l2 2 4-4"/>
+                        <path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z"/>
+                        <path d="M12 6v6l4 2"/>
+                    </svg>
+                </div>
+                <h3>Big Ideas</h3>
+                <p>Transformative concepts, philosophical insights, and paradigm-shifting thoughts.</p>
+                <a href="/ideas" class="category-link">Think Deeper →</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Newsletter Section -->
+<section id="newsletter" class="newsletter-section">
+    <div class="container">
+        <div class="newsletter-content">
+            <h2>Never Miss a Powerful Idea</h2>
+            <p>Join thousands of curious minds who get our best insights delivered weekly. No spam, just pure value.</p>
+            
+            <form class="newsletter-form-hero" action="{{ site.newsletter_action }}" method="post">
+                <div class="form-group">
+                    <input type="email" placeholder="Enter your email address" required>
+                    <button type="submit">Get Weekly Insights</button>
+                </div>
+                <p class="newsletter-privacy">Free forever. Unsubscribe anytime. We respect your privacy.</p>
+            </form>
+            
+            <div class="newsletter-stats">
+                <div class="stat">
+                    <span class="stat-number">10K+</span>
+                    <span class="stat-label">Subscribers</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">95%</span>
+                    <span class="stat-label">Open Rate</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">Weekly</span>
+                    <span class="stat-label">Delivery</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials -->
+<section class="testimonials-section">
+    <div class="container">
+        <h2 class="section-title">What Readers Say</h2>
+        <div class="testimonials-grid">
+            <div class="testimonial">
+                <div class="testimonial-content">
+                    <p>"MuxDay consistently delivers insights that challenge my thinking and expand my worldview. It's become essential reading."</p>
+                </div>
+                <div class="testimonial-author">
+                    <img src="/assets/images/testimonial-1.jpg" alt="Sarah Chen">
+                    <div>
+                        <strong>Sarah Chen</strong>
+                        <span>Tech Executive</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="testimonial">
+                <div class="testimonial-content">
+                    <p>"The perfect blend of depth and accessibility. Every article leaves me with something valuable to think about."</p>
+                </div>
+                <div class="testimonial-author">
+                    <img src="/assets/images/testimonial-2.jpg" alt="Marcus Rodriguez">
+                    <div>
+                        <strong>Marcus Rodriguez</strong>
+                        <span>Creative Director</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="testimonial">
+                <div class="testimonial-content">
+                    <p>"MuxDay doesn't just report trends—it helps you understand the deeper forces shaping our future."</p>
+                </div>
+                <div class="testimonial-author">
+                    <img src="/assets/images/testimonial-3.jpg" alt="Dr. Amara Okafor">
+                    <div>
+                        <strong>Dr. Amara Okafor</strong>
+                        <span>Research Scientist</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,15 @@
+<div class="author-bio">
+    <img src="{{ page.author_image | default: '/assets/images/default-author.jpg' }}" alt="{{ page.author | default: site.author }}" class="author-bio-avatar">
+    <div class="author-bio-content">
+        <h4>{{ page.author | default: site.author }}</h4>
+        <p>{{ page.author_bio | default: site.author_bio }}</p>
+        <div class="author-social">
+            {% if page.author_twitter %}
+            <a href="https://twitter.com/{{ page.author_twitter }}" aria-label="Follow on Twitter">Twitter</a>
+            {% endif %}
+            {% if page.author_linkedin %}
+            <a href="{{ page.author_linkedin }}" aria-label="Connect on LinkedIn">LinkedIn</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
